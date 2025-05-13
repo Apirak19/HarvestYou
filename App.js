@@ -1,24 +1,25 @@
 import { StatusBar } from "expo-status-bar";
-import {
-  Alert,
-  Button,
-  FlatList,
-  ScrollView,
-  Text,
-  TextInput,
-  View,
-  Image,
-} from "react-native";
-import { MainStyle } from "./styles/mainStyle";
+import React, { useState, useEffect } from "react";
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { LoadingPage } from "./pages/LoadingPage";
+import { HomePage } from "./pages/HomePage";
 
-const Logo = require("./assets/corn.png");
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={MainStyle.container}>
-      <Image source={Logo} style={MainStyle.image}></Image>
-      <Text style={MainStyle.header}>Harvest You!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="LoadingPage"
+        screenOptions={{
+          headerShown: false, // This hides the header for all screens
+        }}
+      >
+        <Stack.Screen name="LoadingPage" component={LoadingPage} />
+        <Stack.Screen name="HomePage" component={HomePage} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
